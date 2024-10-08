@@ -11,6 +11,7 @@ type (
 		filters       []filter
 		order         string
 		offset, limit int
+		groupBy       []string
 	}
 
 	filter struct {
@@ -35,6 +36,12 @@ func (b *Builder) Where(query string, args ...interface{}) *Builder {
 		args:       args,
 	})
 
+	return b
+}
+
+// GroupBy sets columns of GROUP BY in SELECT.
+func (b *Builder) GroupBy(cols []string) *Builder {
+	b.groupBy = cols
 	return b
 }
 
@@ -90,6 +97,12 @@ func (b *Builder) Build(query string, args ...interface{}) (string, []interface{
 		sb.WriteByte('\n')
 
 		args = append(args, filter.args...)
+	}
+
+	if len(b.groupBy) > 0 {
+		sb.WriteString("GROUP BY ")
+		sb.WriteString(strings.Join(b.groupBy, ","))
+		sb.WriteByte('\n')
 	}
 
 	if b.order != "" {
