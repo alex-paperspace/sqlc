@@ -1,4 +1,4 @@
-module github.com/yiplee/sqlc
+module github.com/alex-paperspace/sqlc
 
 go 1.13
 
