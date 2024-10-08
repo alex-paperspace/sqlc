@@ -5,8 +5,8 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/yiplee/sqlc"
-	"github.com/yiplee/sqlc/example"
+	"github.com/alex-paperspace/sqlc"
+	"github.com/alex-paperspace/sqlc/example"
 )
 
 func Example_build() {
